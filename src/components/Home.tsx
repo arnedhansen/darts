@@ -10,9 +10,7 @@ export function Home({ onContinue, onStart, muted, onToggleMute, onInstall }: Pr
   return (
     <div className="stack">
       <h1 className="brand">D A R T S</h1>
-      <p className="subtitle">scorer</p>
       <div className="home-hero">
-        <p>301, 501 and Cricket. Built for the oche, calm enough for the living room.</p>
         <button type="button" className="primary-btn" onClick={onStart} style={{ maxWidth: 320 }}>
           START MATCH
         </button>
