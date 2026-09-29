@@ -2,6 +2,7 @@ import type { CricketState, Dart } from '../game/types';
 import { CRICKET_TARGETS, formatDart } from '../game/types';
 import { marksDisplay } from '../game/cricket';
 import { Keypad } from './Keypad';
+import { VisitLog } from './VisitLog';
 
 type Props = {
   state: CricketState;
@@ -9,12 +10,11 @@ type Props = {
   onDart: (dart: Dart) => void;
   onUndo: () => void;
   onEndTurn: () => void;
+  onBust: () => void;
   onQuit: () => void;
 };
 
-export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onQuit }: Props) {
-  const active = state.players[state.currentPlayer];
-
+export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, onQuit }: Props) {
   return (
     <div className="stack">
       <h1 className="brand">D A R T S</h1>
@@ -79,7 +79,8 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onQuit }
               );
             })}
           </div>
-          <p className="muted-note">{active.name} to throw</p>
+
+          <VisitLog state={state} />
         </div>
 
         <Keypad
@@ -87,7 +88,9 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onQuit }
           onDart={onDart}
           onUndo={onUndo}
           onEndTurn={onEndTurn}
+          onBust={onBust}
           canEndTurn={state.dartsThisTurn.length > 0 && state.winnerIndex === null}
+          canBust={state.winnerIndex === null}
         />
       </div>
 

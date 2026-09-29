@@ -130,6 +130,42 @@ export function endX01Turn(state: X01State): X01State {
   return finishTurn(state, false);
 }
 
+/** Zero visit: all darts missed. Clears any mid-turn entry and advances. */
+export function missX01Visit(state: X01State): X01State {
+  if (state.winnerIndex !== null) return state;
+
+  const miss = {
+    segment: 0,
+    multiplier: 1 as const,
+    points: 0,
+    remainingAfter: state.turnStartScore,
+    bust: false,
+  };
+
+  const players = state.players.map((p, i) =>
+    i === state.currentPlayer ? { ...p, score: state.turnStartScore } : p,
+  );
+  const nextPlayer = (state.currentPlayer + 1) % state.players.length;
+
+  return {
+    ...state,
+    players,
+    history: [
+      ...state.history,
+      {
+        playerIndex: state.currentPlayer,
+        darts: [miss, miss, miss],
+        scoreBefore: state.turnStartScore,
+        scoreAfter: state.turnStartScore,
+        bust: false,
+      },
+    ],
+    currentPlayer: nextPlayer,
+    dartsThisTurn: [],
+    turnStartScore: players[nextPlayer].score,
+  };
+}
+
 /**
  * Undo last dart.
  * Mid-turn: drop last dart in dartsThisTurn.

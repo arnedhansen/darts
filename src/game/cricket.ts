@@ -140,6 +140,20 @@ export function endCricketTurn(state: CricketState): CricketState {
   };
 }
 
+/** Zero visit: all darts missed. Clears mid-turn throws and advances. */
+export function missCricketVisit(state: CricketState): CricketState {
+  if (state.winnerIndex !== null) return state;
+
+  let s = state;
+  while (s.dartsThisTurn.length > 0) {
+    s = undoCricket(s);
+  }
+  s = applyCricketDart(s, { segment: 0, multiplier: 1 });
+  s = applyCricketDart(s, { segment: 0, multiplier: 1 });
+  s = applyCricketDart(s, { segment: 0, multiplier: 1 });
+  return s;
+}
+
 type CricketTurn = { playerIndex: number; darts: Dart[] };
 
 function groupCricketTurns(history: CricketHistoryEntry[]): CricketTurn[] {

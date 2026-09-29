@@ -2,11 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Dart, MatchConfig, MatchState, Screen } from './game/types';
 import {
   applyDart,
+  bustVisit,
   clearSnapshot,
   createMatch,
   defaultConfig,
   endTurn,
   loadSnapshot,
+  savePlayerNames,
   saveSnapshot,
   undo,
   winnerName,
@@ -79,9 +81,11 @@ export default function App() {
   };
 
   const startFromConfig = (cfg: MatchConfig) => {
-    const m = createMatch(cfg);
-    setConfig(cfg);
-    setMatch(m);
+    const names = cfg.playerNames.map((n, i) => n.trim() || `Player ${i + 1}`);
+    const next = { ...cfg, playerNames: names };
+    savePlayerNames(names);
+    setConfig(next);
+    setMatch(createMatch(next));
     setLastEvent('');
     setScreen('play');
   };
@@ -139,6 +143,16 @@ export default function App() {
     setLastEvent('turn');
   };
 
+  const handleBust = () => {
+    resumeAudio();
+    if (!match || match.winnerIndex !== null) return;
+    playBust();
+    setShake(true);
+    setTimeout(() => setShake(false), 320);
+    setMatch(bustVisit(match));
+    setLastEvent('bust');
+  };
+
   const toggleMute = () => {
     const next = !isMuted();
     setMuted(next);
@@ -174,12 +188,14 @@ export default function App() {
       {screen === 'setup' && (
         <Setup
           config={config}
-          onChange={setConfig}
+          onChange={(cfg) => {
+            setConfig(cfg);
+            savePlayerNames(cfg.playerNames);
+          }}
           onBack={() => setScreen('home')}
           onPlay={() => {
             resumeAudio();
-            const names = config.playerNames.map((n, i) => n.trim() || `Player ${i + 1}`);
-            startFromConfig({ ...config, playerNames: names });
+            startFromConfig(config);
           }}
         />
       )}
@@ -191,6 +207,7 @@ export default function App() {
           onDart={handleDart}
           onUndo={handleUndo}
           onEndTurn={handleEndTurn}
+          onBust={handleBust}
           onQuit={() => setQuitOpen(true)}
         />
       )}
@@ -202,6 +219,7 @@ export default function App() {
           onDart={handleDart}
           onUndo={handleUndo}
           onEndTurn={handleEndTurn}
+          onBust={handleBust}
           onQuit={() => setQuitOpen(true)}
         />
       )}

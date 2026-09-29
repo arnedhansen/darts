@@ -7,10 +7,12 @@ type Props = {
   onDart: (dart: Dart) => void;
   onUndo: () => void;
   onEndTurn: () => void;
+  onBust: () => void;
   canEndTurn: boolean;
+  canBust: boolean;
 };
 
-export function Keypad({ mode, onDart, onUndo, onEndTurn, canEndTurn }: Props) {
+export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, canBust }: Props) {
   const [mult, setMult] = useState<Multiplier>(1);
 
   const fire = (segment: number, forcedMult?: Multiplier) => {
@@ -75,6 +77,15 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, canEndTurn }: Props) {
         ))}
         <button type="button" className="key accent" onClick={() => fire(0, 1)}>
           MISS
+        </button>
+        <button
+          type="button"
+          className="key danger"
+          onClick={onBust}
+          disabled={!canBust}
+          style={{ opacity: canBust ? 1 : 0.4 }}
+        >
+          BUST
         </button>
         <button type="button" className="key danger" onClick={onUndo}>
           UNDO

@@ -1,8 +1,8 @@
-import type { X01State } from '../game/types';
+import type { X01State, Dart } from '../game/types';
 import { formatDart } from '../game/types';
 import { checkoutHint, currentRemaining } from '../game/x01';
 import { Keypad } from './Keypad';
-import type { Dart } from '../game/types';
+import { VisitLog } from './VisitLog';
 
 type Props = {
   state: X01State;
@@ -10,13 +10,13 @@ type Props = {
   onDart: (dart: Dart) => void;
   onUndo: () => void;
   onEndTurn: () => void;
+  onBust: () => void;
   onQuit: () => void;
 };
 
-export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onQuit }: Props) {
+export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQuit }: Props) {
   const remaining = currentRemaining(state);
   const hint = checkoutHint(remaining, state.doubleOut);
-  const active = state.players[state.currentPlayer];
 
   return (
     <div className="stack">
@@ -63,7 +63,8 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onQuit }: Pr
               );
             })}
           </div>
-          <p className="muted-note">{active.name} to throw</p>
+
+          <VisitLog state={state} />
         </div>
 
         <Keypad
@@ -71,7 +72,9 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onQuit }: Pr
           onDart={onDart}
           onUndo={onUndo}
           onEndTurn={onEndTurn}
+          onBust={onBust}
           canEndTurn={state.dartsThisTurn.length > 0 && state.winnerIndex === null}
+          canBust={state.winnerIndex === null}
         />
       </div>
 

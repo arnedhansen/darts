@@ -58,11 +58,8 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
             className="toggle"
             onClick={() => onChange({ ...config, doubleOut: !config.doubleOut })}
           >
-            <span>
-              <div className="label">Double out</div>
-              <div style={{ fontSize: '0.9rem', marginTop: 2 }}>
-                {config.doubleOut ? 'Must finish on a double' : 'Straight out'}
-              </div>
+            <span className="label" style={{ letterSpacing: '0.04em' }}>
+              Double Out
             </span>
             <span className={`toggle-switch${config.doubleOut ? ' on' : ''}`} />
           </button>

@@ -571,11 +571,70 @@ button {
   text-align: center;
 }
 
+.visit-log {
+  padding: 0.65rem 0.75rem;
+  max-height: min(28vh, 220px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.visit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.visit-row {
+  display: grid;
+  grid-template-columns: minmax(4rem, 0.9fr) 1.6fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.8rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.visit-row:last-child {
+  border-bottom: none;
+}
+
+.visit-name {
+  color: var(--gold);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.visit-darts {
+  font-family: var(--font-mono);
+  color: var(--typed);
+  letter-spacing: 0.02em;
+}
+
+.visit-note {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  text-align: right;
+  font-weight: 700;
+}
+
 @media (min-width: 700px) {
   .play-layout {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
     gap: 1rem;
     align-items: start;
+  }
+
+  .visit-log {
+    max-height: min(40vh, 320px);
   }
 }
