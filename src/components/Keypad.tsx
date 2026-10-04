@@ -41,7 +41,7 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, ca
           onClick={() => setM(1)}
           style={{ flex: 1 }}
         >
-          SINGLE
+          EINFACH
         </button>
         <button
           type="button"
@@ -49,7 +49,7 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, ca
           onClick={() => setM(2)}
           style={{ flex: 1 }}
         >
-          DOUBLE
+          DOPPEL
         </button>
         <button
           type="button"
@@ -76,19 +76,19 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, ca
           </button>
         ))}
         <button type="button" className="key accent" onClick={() => fire(0, 1)}>
-          MISS
+          VERFEHLT
         </button>
         <button
           type="button"
-          className="key danger"
+          className="key danger key-small"
           onClick={onBust}
           disabled={!canBust}
           style={{ opacity: canBust ? 1 : 0.4 }}
         >
-          BUST
+          ALLES VERFEHLT
         </button>
         <button type="button" className="key danger" onClick={onUndo}>
-          UNDO
+          RÜCKGÄNGIG
         </button>
         <button
           type="button"
@@ -97,7 +97,7 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, ca
           disabled={!canEndTurn}
           style={{ opacity: canEndTurn ? 1 : 0.4 }}
         >
-          END TURN
+          ZUG ENDE
         </button>
       </div>
     </div>

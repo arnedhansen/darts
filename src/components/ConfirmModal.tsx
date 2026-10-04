@@ -12,8 +12,8 @@ export function ConfirmModal({
   open,
   title,
   message,
-  confirmLabel = 'CONFIRM',
-  cancelLabel = 'CANCEL',
+  confirmLabel = 'BESTÄTIGEN',
+  cancelLabel = 'ABBRECHEN',
   onConfirm,
   onCancel,
 }: Props) {

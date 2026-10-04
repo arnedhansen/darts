@@ -18,7 +18,7 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, 
   return (
     <div className="stack">
       <h1 className="brand">D A R T S</h1>
-      <p className="subtitle">cricket</p>
+      <p className="subtitle">Cricket</p>
 
       <div className={`play-layout${shake ? ' shake' : ''}`}>
         <div className="stack">
@@ -54,7 +54,7 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, 
                   </tr>
                 ))}
                 <tr>
-                  <td className="target">PTS</td>
+                  <td className="target">PKT</td>
                   {state.players.map((p, i) => (
                     <td
                       key={i}
@@ -96,7 +96,7 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, 
 
       <div className="footer-bar">
         <button type="button" className="footer-btn" onClick={onQuit}>
-          QUIT
+          BEENDEN
         </button>
       </div>
     </div>

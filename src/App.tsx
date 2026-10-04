@@ -32,15 +32,15 @@ import { ConfirmModal } from './components/ConfirmModal';
 import { InstallHint } from './components/InstallHint';
 
 function toastForMatch(match: MatchState | null, lastEvent: string): { message: string; tone: 'normal' | 'danger' | 'success' } {
-  if (!match) return { message: 'Ready when you are', tone: 'normal' };
-  if (lastEvent === 'bust') return { message: 'BUST', tone: 'danger' };
+  if (!match) return { message: 'Bereit', tone: 'normal' };
+  if (lastEvent === 'bust') return { message: 'ALLES VERFEHLT', tone: 'danger' };
   if (match.winnerIndex !== null) {
-    return { message: `${match.players[match.winnerIndex].name} wins!`, tone: 'success' };
+    return { message: `${match.players[match.winnerIndex].name} gewinnt!`, tone: 'success' };
   }
   const name = match.players[match.currentPlayer].name;
   const dartsLeft = 3 - match.dartsThisTurn.length;
   return {
-    message: `${name} · ${dartsLeft} dart${dartsLeft === 1 ? '' : 's'} left`,
+    message: `${name} · ${dartsLeft} Pfeil${dartsLeft === 1 ? '' : 'e'} übrig`,
     tone: 'normal',
   };
 }
@@ -81,7 +81,7 @@ export default function App() {
   };
 
   const startFromConfig = (cfg: MatchConfig) => {
-    const names = cfg.playerNames.map((n, i) => n.trim() || `Player ${i + 1}`);
+    const names = cfg.playerNames.map((n, i) => n.trim() || `Spieler ${i + 1}`);
     const next = { ...cfg, playerNames: names };
     savePlayerNames(names);
     setConfig(next);
@@ -226,7 +226,7 @@ export default function App() {
 
       {screen === 'winner' && match && (
         <Winner
-          name={winnerName(match) ?? 'Winner'}
+          name={winnerName(match) ?? 'Sieger'}
           onRematch={() => startFromConfig(config)}
           onHome={goHome}
         />
@@ -234,10 +234,10 @@ export default function App() {
 
       <ConfirmModal
         open={quitOpen}
-        title="Leave match?"
-        message="Progress for this match will be cleared."
-        confirmLabel="QUIT"
-        cancelLabel="KEEP PLAYING"
+        title="Spiel beenden?"
+        message="Der Fortschritt dieses Spiels wird gelöscht."
+        confirmLabel="BEENDEN"
+        cancelLabel="WEITERSPIELEN"
         onCancel={() => setQuitOpen(false)}
         onConfirm={() => {
           setQuitOpen(false);

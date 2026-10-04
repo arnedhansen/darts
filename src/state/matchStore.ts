@@ -17,7 +17,7 @@ export function loadSavedPlayerNames(): string[] | null {
     if (!raw) return null;
     const names = JSON.parse(raw) as unknown;
     if (!Array.isArray(names) || names.length < 2 || names.length > 4) return null;
-    return names.map((n) => String(n).slice(0, 16) || 'Player');
+    return names.map((n) => String(n).slice(0, 16) || 'Spieler');
   } catch {
     return null;
   }
@@ -28,7 +28,7 @@ export function savePlayerNames(names: string[]) {
   try {
     localStorage.setItem(
       PLAYERS_KEY,
-      JSON.stringify(names.map((n, i) => n.trim() || `Player ${i + 1}`)),
+      JSON.stringify(names.map((n, i) => n.trim() || `Spieler ${i + 1}`)),
     );
   } catch {
     /* ignore */
@@ -38,14 +38,18 @@ export function savePlayerNames(names: string[]) {
 export function defaultConfig(): MatchConfig {
   return {
     mode: '501',
-    playerNames: loadSavedPlayerNames() ?? ['Player 1', 'Player 2'],
+    playerNames: loadSavedPlayerNames() ?? ['Spieler 1', 'Spieler 2'],
     doubleOut: false,
   };
 }
 
 export function createMatch(config: MatchConfig): MatchState {
-  if (config.mode === 'cricket') return createCricketState(config);
-  return createX01State(config);
+  const start = Math.floor(Math.random() * config.playerNames.length);
+  if (config.mode === 'cricket') {
+    return { ...createCricketState(config), currentPlayer: start };
+  }
+  const x01 = createX01State(config);
+  return { ...x01, currentPlayer: start, turnStartScore: x01.players[start].score };
 }
 
 export function applyDart(match: MatchState, dart: Dart): MatchState {

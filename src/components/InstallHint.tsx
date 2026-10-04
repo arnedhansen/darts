@@ -8,14 +8,15 @@ export function InstallHint({ open, onClose }: Props) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <h2>INSTALL ON IPAD</h2>
+        <h2>AUF DEM IPAD INSTALLIEREN</h2>
         <p>
-          In Safari, tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.
-          The app opens fullscreen and works offline after the first visit.
+          In Safari auf <strong>Teilen</strong> tippen, dann{' '}
+          <strong>Zum Home-Bildschirm</strong>. Danach startet die App im Vollbild und
+          funktioniert auch offline.
         </p>
         <div className="modal-actions">
           <button type="button" className="primary-btn" onClick={onClose}>
-            GOT IT
+            VERSTANDEN
           </button>
         </div>
       </div>

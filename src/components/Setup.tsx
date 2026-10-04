@@ -20,7 +20,7 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
     const n = config.playerNames.length + 1;
     onChange({
       ...config,
-      playerNames: [...config.playerNames, `Player ${n}`],
+      playerNames: [...config.playerNames, `Spieler ${n}`],
     });
   };
 
@@ -35,10 +35,10 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
   return (
     <div className="stack">
       <h1 className="brand">D A R T S</h1>
-      <p className="subtitle">match setup</p>
+      <p className="subtitle">Einstellungen</p>
 
       <div className="panel stack">
-        <div className="label">Game</div>
+        <div className="label">Spiel</div>
         <div className="seg">
           {(['301', '501', 'cricket'] as GameMode[]).map((mode) => (
             <button
@@ -65,7 +65,7 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
           </button>
         )}
 
-        <div className="label">Players ({config.playerNames.length})</div>
+        <div className="label">Spieler ({config.playerNames.length})</div>
         <div className="player-list">
           {config.playerNames.map((name, i) => (
             <div className="player-edit" key={i}>
@@ -74,14 +74,14 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
                 value={name}
                 maxLength={16}
                 onChange={(e) => setName(i, e.target.value)}
-                aria-label={`Player ${i + 1} name`}
+                aria-label={`Name Spieler ${i + 1}`}
               />
               <button
                 type="button"
                 className="icon-btn"
                 onClick={() => removePlayer(i)}
                 disabled={config.playerNames.length <= 2}
-                aria-label="Remove player"
+                aria-label="Spieler entfernen"
               >
                 −
               </button>
@@ -90,17 +90,17 @@ export function Setup({ config, onChange, onBack, onPlay }: Props) {
         </div>
         {config.playerNames.length < 4 && (
           <button type="button" className="footer-btn" onClick={addPlayer}>
-            ADD PLAYER
+            SPIELER HINZUFÜGEN
           </button>
         )}
       </div>
 
       <button type="button" className="primary-btn" onClick={onPlay}>
-        PLAY
+        STARTEN
       </button>
       <div className="footer-bar">
         <button type="button" className="footer-btn" onClick={onBack}>
-          BACK
+          ZURÜCK
         </button>
       </div>
     </div>

@@ -80,9 +80,9 @@ export function dartPoints(dart: Dart): number {
 }
 
 export function formatDart(dart: Dart): string {
-  if (dart.segment === 0) return 'Miss';
+  if (dart.segment === 0) return 'VERFEHLT';
   if (dart.segment === 25) {
-    return dart.multiplier === 2 ? 'DBull' : 'Bull';
+    return dart.multiplier === 2 ? 'DBULL' : 'BULL';
   }
   const prefix = dart.multiplier === 3 ? 'T' : dart.multiplier === 2 ? 'D' : '';
   return `${prefix}${dart.segment}`;

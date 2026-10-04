@@ -12,8 +12,14 @@ function x01Rows(state: X01State): VisitRow[] {
   return [...state.history].reverse().map((h, i) => {
     const darts = h.darts.map(formatDart).join('  ');
     const delta = h.scoreBefore - h.scoreAfter;
-    let note = h.bust ? 'bust' : delta === 0 ? '0' : `−${delta}`;
-    if (!h.bust && h.scoreAfter === 0) note = 'out';
+    const allMiss = h.darts.length > 0 && h.darts.every((d) => d.segment === 0);
+    let note =
+      h.bust || (delta === 0 && allMiss)
+        ? 'ALLES VERFEHLT'
+        : delta === 0
+          ? '0'
+          : `−${delta}`;
+    if (!h.bust && h.scoreAfter === 0) note = 'AUS';
     return {
       key: `x-${state.history.length - i}`,
       name: state.players[h.playerIndex].name,
@@ -38,7 +44,7 @@ function cricketRows(state: CricketState): VisitRow[] {
     key: `c-${turns.length - i}`,
     name: state.players[t.playerIndex].name,
     darts: t.darts.join('  '),
-    note: '',
+    note: '—',
   }));
 }
 
@@ -52,16 +58,27 @@ export function VisitLog({ state }: Props) {
 
   return (
     <div className="visit-log panel">
-      <div className="label">Visits</div>
-      <ul className="visit-list">
-        {rows.map((row) => (
-          <li key={row.key} className="visit-row">
-            <span className="visit-name">{row.name}</span>
-            <span className="visit-darts">{row.darts}</span>
-            {row.note ? <span className="visit-note">{row.note}</span> : null}
-          </li>
-        ))}
-      </ul>
+      <div className="label">Runden</div>
+      <div className="visit-table-wrap">
+        <table className="visit-table">
+          <thead>
+            <tr>
+              <th>Spieler</th>
+              <th>Darts</th>
+              <th>Ergebnis</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.key}>
+                <td className="visit-name">{row.name}</td>
+                <td className="visit-darts">{row.darts}</td>
+                <td className="visit-note">{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQu
       <h1 className="brand">D A R T S</h1>
       <p className="subtitle">
         {state.startScore}
-        {state.doubleOut ? ' · double out' : ' · straight out'}
+        {state.doubleOut ? ' · Double Out' : ' · Straight Out'}
       </p>
 
       <div className={`play-layout${shake ? ' shake' : ''}`}>
@@ -40,7 +40,7 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQu
                   <div className="player-name">{p.name}</div>
                   {i === state.currentPlayer && hint && (
                     <div className="muted-note" style={{ textAlign: 'left', marginTop: 4 }}>
-                      hint {hint}
+                      Tipp {hint}
                     </div>
                   )}
                 </div>
@@ -80,7 +80,7 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQu
 
       <div className="footer-bar">
         <button type="button" className="footer-btn" onClick={onQuit}>
-          QUIT
+          BEENDEN
         </button>
       </div>
     </div>
