@@ -9,12 +9,11 @@ type Props = {
   shake: boolean;
   onDart: (dart: Dart) => void;
   onUndo: () => void;
-  onEndTurn: () => void;
   onBust: () => void;
   onQuit: () => void;
 };
 
-export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQuit }: Props) {
+export function X01Board({ state, shake, onDart, onUndo, onBust, onQuit }: Props) {
   const remaining = currentRemaining(state);
   const hint = checkoutHint(remaining, state.doubleOut);
 
@@ -71,9 +70,7 @@ export function X01Board({ state, shake, onDart, onUndo, onEndTurn, onBust, onQu
           mode="x01"
           onDart={onDart}
           onUndo={onUndo}
-          onEndTurn={onEndTurn}
           onBust={onBust}
-          canEndTurn={state.dartsThisTurn.length > 0 && state.winnerIndex === null}
           canBust={state.winnerIndex === null}
         />
       </div>

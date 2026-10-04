@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-<rect width="64" height="64" fill="#0b0c10"/>
-<circle cx="32" cy="32" r="26" fill="none" stroke="#e0c36a" stroke-width="3"/>
-<circle cx="32" cy="32" r="14" fill="none" stroke="#3dd68c" stroke-width="2.5"/>
-<circle cx="32" cy="32" r="4" fill="#e0c36a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#eef1f6"/>
+  <!-- board -->
+  <circle cx="32" cy="34" r="22" fill="#ffffff" stroke="#9a7420" stroke-width="2.5"/>
+  <circle cx="32" cy="34" r="16" fill="none" stroke="#c5ccd9" stroke-width="1.5"/>
+  <circle cx="32" cy="34" r="10" fill="none" stroke="#2f9d6a" stroke-width="2"/>
+  <circle cx="32" cy="34" r="3.5" fill="#d64555"/>
+  <!-- dart body -->
+  <g transform="rotate(-38 32 34)">
+    <path d="M32 8 L34.2 28 L32 30 L29.8 28 Z" fill="#1a2030"/>
+    <path d="M30.2 12 L32 8 L33.8 12 Z" fill="#2f9d6a"/>
+    <path d="M29.6 18 L32 14.5 L34.4 18 Z" fill="#9a7420"/>
+    <circle cx="32" cy="34" r="1.6" fill="#1a2030"/>
+  </g>
 </svg>

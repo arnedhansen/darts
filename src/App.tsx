@@ -6,7 +6,6 @@ import {
   clearSnapshot,
   createMatch,
   defaultConfig,
-  endTurn,
   loadSnapshot,
   savePlayerNames,
   saveSnapshot,
@@ -135,14 +134,6 @@ export default function App() {
     setLastEvent('undo');
   };
 
-  const handleEndTurn = () => {
-    resumeAudio();
-    if (!match) return;
-    playConfirm();
-    setMatch(endTurn(match));
-    setLastEvent('turn');
-  };
-
   const handleBust = () => {
     resumeAudio();
     if (!match || match.winnerIndex !== null) return;
@@ -206,7 +197,6 @@ export default function App() {
           shake={shake}
           onDart={handleDart}
           onUndo={handleUndo}
-          onEndTurn={handleEndTurn}
           onBust={handleBust}
           onQuit={() => setQuitOpen(true)}
         />
@@ -218,7 +208,6 @@ export default function App() {
           shake={shake}
           onDart={handleDart}
           onUndo={handleUndo}
-          onEndTurn={handleEndTurn}
           onBust={handleBust}
           onQuit={() => setQuitOpen(true)}
         />

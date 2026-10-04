@@ -55,5 +55,5 @@ export function Confetti() {
 
 export function isJohannesWinner(name: string): boolean {
   const n = name.trim().toLowerCase();
-  return n === 'johannes' || n === 'jopi' || n === 'jo';
+  return n === 'johannes' || n === 'jopi' || n === 'jo' || n === 'papa';
 }

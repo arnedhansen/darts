@@ -9,12 +9,11 @@ type Props = {
   shake: boolean;
   onDart: (dart: Dart) => void;
   onUndo: () => void;
-  onEndTurn: () => void;
   onBust: () => void;
   onQuit: () => void;
 };
 
-export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, onQuit }: Props) {
+export function CricketBoard({ state, shake, onDart, onUndo, onBust, onQuit }: Props) {
   return (
     <div className="stack">
       <h1 className="brand">D A R T S</h1>
@@ -87,9 +86,7 @@ export function CricketBoard({ state, shake, onDart, onUndo, onEndTurn, onBust, 
           mode="cricket"
           onDart={onDart}
           onUndo={onUndo}
-          onEndTurn={onEndTurn}
           onBust={onBust}
-          canEndTurn={state.dartsThisTurn.length > 0 && state.winnerIndex === null}
           canBust={state.winnerIndex === null}
         />
       </div>

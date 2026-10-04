@@ -6,13 +6,11 @@ type Props = {
   mode: 'x01' | 'cricket';
   onDart: (dart: Dart) => void;
   onUndo: () => void;
-  onEndTurn: () => void;
   onBust: () => void;
-  canEndTurn: boolean;
   canBust: boolean;
 };
 
-export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, canBust }: Props) {
+export function Keypad({ mode, onDart, onUndo, onBust, canBust }: Props) {
   const [mult, setMult] = useState<Multiplier>(1);
 
   const fire = (segment: number, forcedMult?: Multiplier) => {
@@ -87,17 +85,8 @@ export function Keypad({ mode, onDart, onUndo, onEndTurn, onBust, canEndTurn, ca
         >
           ALLES VERFEHLT
         </button>
-        <button type="button" className="key danger" onClick={onUndo}>
+        <button type="button" className="key danger wide" onClick={onUndo}>
           RÜCKGÄNGIG
-        </button>
-        <button
-          type="button"
-          className="key accent wide"
-          onClick={onEndTurn}
-          disabled={!canEndTurn}
-          style={{ opacity: canEndTurn ? 1 : 0.4 }}
-        >
-          ZUG ENDE
         </button>
       </div>
     </div>
