@@ -20,7 +20,7 @@ export function CricketBoard({ state, shake, onDart, onUndo, onBust, onQuit }: P
       <p className="subtitle">Cricket</p>
 
       <div className={`play-layout${shake ? ' shake' : ''}`}>
-        <div className="stack">
+        <div className="stack play-main">
           <div className="panel" style={{ padding: '0.5rem' }}>
             <table className="cricket-grid">
               <thead>
@@ -78,8 +78,6 @@ export function CricketBoard({ state, shake, onDart, onUndo, onBust, onQuit }: P
               );
             })}
           </div>
-
-          <VisitLog state={state} />
         </div>
 
         <Keypad
@@ -89,6 +87,8 @@ export function CricketBoard({ state, shake, onDart, onUndo, onBust, onQuit }: P
           onBust={onBust}
           canBust={state.winnerIndex === null}
         />
+
+        <VisitLog state={state} />
       </div>
 
       <div className="footer-bar">

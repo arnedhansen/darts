@@ -640,7 +640,9 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
+  min-width: 0;
 }
+
 
 .visit-table-wrap {
   overflow-y: auto;
@@ -717,13 +719,14 @@ button {
 @media (min-width: 700px) {
   .play-layout {
     display: grid;
-    grid-template-columns: 1fr 1.1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(12rem, 0.95fr);
     gap: 1.1rem;
     align-items: start;
   }
 
   .visit-log {
-    max-height: min(42vh, 360px);
+    max-height: min(70vh, 560px);
+    height: 100%;
   }
 
   .player-score {
@@ -733,5 +736,16 @@ button {
   .key {
     min-height: 4.25rem;
     font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 699px) {
+  .play-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .play-layout .visit-log {
+    order: 3;
   }
 }

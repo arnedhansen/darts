@@ -55,30 +55,35 @@ type Props = {
 
 export function VisitLog({ state }: Props) {
   const rows = state.kind === 'x01' ? x01Rows(state) : cricketRows(state);
-  if (rows.length === 0) return null;
 
   return (
     <div className="visit-log panel">
       <div className="label">Runden</div>
       <div className="visit-table-wrap">
-        <table className="visit-table">
-          <thead>
-            <tr>
-              <th>Spieler</th>
-              <th>Darts</th>
-              <th>Ergebnis</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => (
-              <tr key={row.key}>
-                <td className="visit-name">{row.name}</td>
-                <td className="visit-darts">{row.darts}</td>
-                <td className="visit-note">{row.note}</td>
+        {rows.length === 0 ? (
+          <p className="muted-note" style={{ margin: '0.5rem 0' }}>
+            —
+          </p>
+        ) : (
+          <table className="visit-table">
+            <thead>
+              <tr>
+                <th>Spieler</th>
+                <th>Darts</th>
+                <th>Ergebnis</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.key}>
+                  <td className="visit-name">{row.name}</td>
+                  <td className="visit-darts">{row.darts}</td>
+                  <td className="visit-note">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

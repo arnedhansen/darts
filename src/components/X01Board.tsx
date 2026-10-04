@@ -26,7 +26,7 @@ export function X01Board({ state, shake, onDart, onUndo, onBust, onQuit }: Props
       </p>
 
       <div className={`play-layout${shake ? ' shake' : ''}`}>
-        <div className="stack">
+        <div className="stack play-main">
           <div className="scoreboard">
             {state.players.map((p, i) => (
               <div
@@ -62,8 +62,6 @@ export function X01Board({ state, shake, onDart, onUndo, onBust, onQuit }: Props
               );
             })}
           </div>
-
-          <VisitLog state={state} />
         </div>
 
         <Keypad
@@ -73,6 +71,8 @@ export function X01Board({ state, shake, onDart, onUndo, onBust, onQuit }: Props
           onBust={onBust}
           canBust={state.winnerIndex === null}
         />
+
+        <VisitLog state={state} />
       </div>
 
       <div className="footer-bar">
