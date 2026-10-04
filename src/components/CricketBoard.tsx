@@ -80,15 +80,16 @@ export function CricketBoard({ state, shake, onDart, onUndo, onBust, onQuit }: P
           </div>
         </div>
 
-        <Keypad
-          mode="cricket"
-          onDart={onDart}
-          onUndo={onUndo}
-          onBust={onBust}
-          canBust={state.winnerIndex === null}
-        />
-
-        <VisitLog state={state} />
+        <div className="stack play-side">
+          <Keypad
+            mode="cricket"
+            onDart={onDart}
+            onUndo={onUndo}
+            onBust={onBust}
+            canBust={state.winnerIndex === null}
+          />
+          <VisitLog state={state} />
+        </div>
       </div>
 
       <div className="footer-bar">

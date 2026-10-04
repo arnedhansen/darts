@@ -64,15 +64,16 @@ export function X01Board({ state, shake, onDart, onUndo, onBust, onQuit }: Props
           </div>
         </div>
 
-        <Keypad
-          mode="x01"
-          onDart={onDart}
-          onUndo={onUndo}
-          onBust={onBust}
-          canBust={state.winnerIndex === null}
-        />
-
-        <VisitLog state={state} />
+        <div className="stack play-side">
+          <Keypad
+            mode="x01"
+            onDart={onDart}
+            onUndo={onUndo}
+            onBust={onBust}
+            canBust={state.winnerIndex === null}
+          />
+          <VisitLog state={state} />
+        </div>
       </div>
 
       <div className="footer-bar">
