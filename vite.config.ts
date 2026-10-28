@@ -17,7 +17,9 @@ export default defineConfig({
         background_color: '#eef1f6',
         display: 'standalone',
         orientation: 'any',
-        start_url: '/',
+        id: '/darts/',
+        scope: '/darts/',
+        start_url: '/darts/',
         icons: [
           {
             src: 'pwa-192.png',
